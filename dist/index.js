@@ -25,7 +25,7 @@ try {
   const ref = github.context.ref
   console.log(`ref: ${ref}`);
   console.log("--------------------------------");
-  console.log(`The event payload: ${payload}`);
+  console.log(`The event pull: ${payload}`);
 } catch (error) {
   core.setFailed(error.message);
 }
