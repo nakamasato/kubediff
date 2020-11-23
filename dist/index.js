@@ -21,7 +21,9 @@ try {
   const time = (new Date()).toTimeString();
   core.setOutput("time", time);
   // Get the JSON webhook payload for the event that triggered the workflow
-  const payload = JSON.stringify(github.context.payload.pull_request.base, undefined, 2)
+  const action = JSON.stringify(github.context.payload.action, undefined, 2)
+  console.log(`action: ${action}`);
+  const payload = JSON.stringify(github.context.payload.pull_request.base.ref, undefined, 2)
   const ref = github.context.ref
   console.log(`ref: ${ref}`);
   console.log("--------------------------------");
