@@ -17,6 +17,7 @@ try {
   let base: string | undefined
   let head: string | undefined
   const eventName = context.eventName
+  console.log(`eventName: ${eventName}`);
 
   switch (eventName) {
     case 'pull_request':
