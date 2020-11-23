@@ -17,8 +17,9 @@ try {
   const payload = JSON.stringify(github.context.payload, undefined, 2)
   const ref = github.context.ref
   console.log(`ref: ${ref}`);
+  const pull_request = JSON.stringify(github.context.payload.pull_request, undefined, 2)
   console.log("--------------------------------");
-  console.log(`The event payload: ${payload}`);
+  console.log(`The event pull: ${pull_request}`);
 } catch (error) {
   core.setFailed(error.message);
 }
