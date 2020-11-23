@@ -8,6 +8,12 @@ module.exports =
 const core = __webpack_require__(80);
 const github = __webpack_require__(468);
 
+const FILES          = new Set();
+const FILES_ADDED    = new Set();
+const FILES_MODIFIED = new Set();
+const FILES_REMOVED  = new Set();
+const FILES_RENAMED  = new Set();
+
 try {
   // `who-to-greet` input defined in action metadata file
   const nameToGreet = core.getInput('who-to-greet');
@@ -16,8 +22,6 @@ try {
   core.setOutput("time", time);
   // Get the JSON webhook payload for the event that triggered the workflow
   const payload = JSON.stringify(github.context.payload, undefined, 2)
-  const baseBranch = github.context.payload.base.ref
-  console.log(`The base branch: ${baseBranch}`);
   console.log("--------------------------------");
   console.log(`The event payload: ${payload}`);
 } catch (error) {
