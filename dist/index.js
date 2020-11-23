@@ -3,29 +3,40 @@ require('./sourcemap-register.js');module.exports =
 /******/ 	var __webpack_modules__ = ({
 
 /***/ 932:
-/***/ ((__unused_webpack_module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
+"use strict";
+
+var _a, _b, _c, _d;
+Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __webpack_require__(186);
-const github = __webpack_require__(438);
-const FILES = new Set();
-const FILES_ADDED = new Set();
-const FILES_MODIFIED = new Set();
-const FILES_REMOVED = new Set();
-const FILES_RENAMED = new Set();
+const github_1 = __webpack_require__(438);
 try {
     // `who-to-greet` input defined in action metadata file
     const nameToGreet = core.getInput('who-to-greet');
     console.log(`Hello ${nameToGreet}!`);
     const time = (new Date()).toTimeString();
     core.setOutput("time", time);
-    // Get the JSON webhook payload for the event that triggered the workflow
-    // const eventName = github.context.eventName
-    // Define the base and head commits to be extracted from the payload.
-    const action = JSON.stringify(github.context.payload.action, undefined, 2);
+    let base;
+    let head;
+    const eventName = github_1.context.eventName;
+    switch (eventName) {
+        case 'pull_request':
+            base = (_b = (_a = github_1.context.payload.pull_request) === null || _a === void 0 ? void 0 : _a.base) === null || _b === void 0 ? void 0 : _b.sha;
+            head = (_d = (_c = github_1.context.payload.pull_request) === null || _c === void 0 ? void 0 : _c.head) === null || _d === void 0 ? void 0 : _d.sha;
+            break;
+        case 'push':
+            base = github_1.context.payload.before;
+            head = github_1.context.payload.after;
+            break;
+        default:
+            core.setFailed(`This action only supports pull requests and pushes, ${github_1.context.eventName} events are not supported. ` +
+                "Please submit an issue on this action's GitHub repo if you believe this in correct.");
+    }
+    const action = JSON.stringify(github_1.context.payload.action, undefined, 2);
     console.log(`action: ${action}`);
-    const baseBranch = JSON.stringify(github.context.payload.pull_request.base.ref, undefined, 2);
-    console.log(`baseBranch: ${baseBranch}`);
-    const payload = JSON.stringify(github.context.payload, undefined, 2);
+    console.log(`base: ${base}, head: ${head}`);
+    const payload = JSON.stringify(github_1.context.payload, undefined, 2);
     console.log("--------------------------------");
     console.log(`The event payload: ${payload}`);
 }
