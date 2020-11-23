@@ -1,5 +1,5 @@
 "use strict";
-var _a, _b, _c, _d;
+var _a, _b, _c, _d, _e;
 Object.defineProperty(exports, "__esModule", { value: true });
 const core = require('@actions/core');
 const github_1 = require("@actions/github");
@@ -28,7 +28,7 @@ try {
     const action = JSON.stringify(github_1.context.payload.action, undefined, 2);
     console.log(`action: ${action}`);
     console.log(`base: ${base}, head: ${head}`);
-    const payload = JSON.stringify(github_1.context.payload, undefined, 2);
+    const payload = JSON.stringify((_e = github_1.context.payload.pull_request) === null || _e === void 0 ? void 0 : _e.base, undefined, 2);
     console.log("--------------------------------");
     console.log(`The event payload: ${payload}`);
 }
