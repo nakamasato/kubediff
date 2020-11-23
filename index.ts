@@ -38,7 +38,7 @@ try {
   const action = JSON.stringify(context.payload.action, undefined, 2)
   console.log(`action: ${action}`);
   console.log(`base: ${base}, head: ${head}`);
-  const payload = JSON.stringify(context.payload.pull_request?.base, undefined, 2)
+  const payload = JSON.stringify(context.payload.pull_request?.base?.sha, undefined, 2)
   console.log("--------------------------------");
   console.log(`The event payload: ${payload}`);
 } catch (error) {

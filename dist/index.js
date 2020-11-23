@@ -7,7 +7,7 @@ require('./sourcemap-register.js');module.exports =
 
 "use strict";
 
-var _a, _b, _c, _d, _e;
+var _a, _b, _c, _d, _e, _f;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 const core = __webpack_require__(186);
 const github_1 = __webpack_require__(438);
@@ -36,7 +36,7 @@ try {
     const action = JSON.stringify(github_1.context.payload.action, undefined, 2);
     console.log(`action: ${action}`);
     console.log(`base: ${base}, head: ${head}`);
-    const payload = JSON.stringify((_e = github_1.context.payload.pull_request) === null || _e === void 0 ? void 0 : _e.base, undefined, 2);
+    const payload = JSON.stringify((_f = (_e = github_1.context.payload.pull_request) === null || _e === void 0 ? void 0 : _e.base) === null || _f === void 0 ? void 0 : _f.sha, undefined, 2);
     console.log("--------------------------------");
     console.log(`The event payload: ${payload}`);
 }
